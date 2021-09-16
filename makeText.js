@@ -2,6 +2,7 @@
 
 const { MarkovMachine } = require("./markov");
 const fs = require("fs");
+const axios = require("axios");
 
 function generateText(text) {
     let newText = new MarkovMachine(text);
@@ -20,10 +21,11 @@ function makeTextFromFile(path) {
 }
 
 async function makeTextFromUrl(url) {
+    let resp;
     try {
-        let resp = await axios.get(url);
+        resp = await axios.get(url);
     } catch (err) {
-        console.err(`Cannot read URL: ${url}: ${err}`);
+        console.error(`Cannot read URL: ${url}: ${err}`);
         process.exit(1);
     }
     generateText(resp.data);

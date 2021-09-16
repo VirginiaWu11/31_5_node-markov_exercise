@@ -35,17 +35,17 @@ class MarkovMachine {
         let word = Object.keys(this.obj)[
             Math.floor(Math.random() * Object.keys(this.obj).length)
         ];
-        let sentence = word;
-        while (word !== null) {
+        let sentenceArr = [word];
+        while (sentenceArr.length < numWords && word !== null) {
             word =
                 this.obj[word][
                     Math.floor(Math.random() * this.obj[word].length)
                 ];
             if (word !== null) {
-                sentence += " " + word;
+                sentenceArr.push(word);
             }
         }
-        return sentence;
+        return sentenceArr.join(" ");
     }
 }
 
